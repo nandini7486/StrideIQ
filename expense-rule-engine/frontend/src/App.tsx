@@ -8,13 +8,11 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <RuleProvider>
-        <div className="min-h-screen bg-white">
-          <Routes>
-            <Route path="/" element={<RulesPage />} />
-            <Route path="/rules" element={<RulesPage />} />
-          </Routes>
-          <Toaster />
-        </div>
+        <Routes>
+          <Route path="/" element={<RulesPage />} />
+          <Route path="/rules" element={<RulesPage />} />
+        </Routes>
+        <Toaster />
       </RuleProvider>
     </ThemeProvider>
   )

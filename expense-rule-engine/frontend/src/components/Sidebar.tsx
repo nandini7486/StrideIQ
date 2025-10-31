@@ -1,50 +1,49 @@
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
-interface NavItemProps {
-  to: string;
-  children: React.ReactNode;
+interface NavItem {
+  name: string;
+  href: string;
 }
 
-const NavItem = ({ to, children }: NavItemProps) => (
-  <NavLink
-    to={to}
-    className={({ isActive }) =>
-      `flex items-center px-4 py-3 text-sm font-medium ${isActive ? 'bg-gray-100 text-black' : 'text-gray-700 hover:bg-gray-50'}`
-    }
-  >
-    {children}
-  </NavLink>
-);
+const navigation: NavItem[] = [
+  { 
+    name: 'Rules', 
+    href: '/rules'
+  },
+  { 
+    name: 'Audit Log', 
+    href: '/audit-log'
+  },
+  { 
+    name: 'Settings', 
+    href: '/settings'
+  },
+];
 
 export function Sidebar() {
+  const location = useLocation();
+
   return (
-    <div className="h-full flex flex-col">
-      <div className="p-4 border-b border-gray-200">
-        <h1 className="text-xl font-semibold">Policy Engine</h1>
-      </div>
-      
-      <nav className="flex-1 overflow-y-auto py-2">
-        <ul>
-          <li>
-            <NavItem to="/rules">
-              <span className="w-5 h-5 mr-3">•</span>
-              Rules
-            </NavItem>
-          </li>
-          <li>
-            <NavItem to="/audit-log">
-              <span className="w-5 h-5 mr-3">•</span>
-              Audit Log
-            </NavItem>
-          </li>
-          <li>
-            <NavItem to="/settings">
-              <span className="w-5 h-5 mr-3">•</span>
-              Settings
-            </NavItem>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <nav className="flex flex-col px-4 py-2 space-y-1">
+      {navigation.map((item) => {
+        const isActive = location.pathname.startsWith(item.href);
+        
+        return (
+          <Link
+            key={item.name}
+            to={item.href}
+            className={cn(
+              'px-4 py-3 text-sm rounded-md transition-colors duration-200',
+              isActive
+                ? 'bg-[#F5F5F5] text-black font-medium' 
+                : 'text-[#666666] hover:bg-[#F5F5F5] hover:text-black'
+            )}
+          >
+            {item.name}
+          </Link>
+        );
+      })}
+    </nav>
   );
 }

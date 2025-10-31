@@ -4,11 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import App from './App';
-import './index.css';
 
-// Import styles
-// import '@radix-ui/themes/styles.css';
-// import './theme-config.css';
+// Import styles - theme-config first so Tailwind is available
+import './theme-config.css';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

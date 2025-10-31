@@ -5,8 +5,15 @@ import { router } from './routes';
 
 const app = express();
 
+// CORS Configuration
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  credentials: true,
+  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // API Routes

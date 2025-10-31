@@ -4,6 +4,8 @@ export interface Rule {
   condition: string;
   actions: string[];
   active: boolean;
+  priority: number;
+  createdAt: string;
   updatedAt: string;
 }
 
@@ -34,7 +36,7 @@ export type Operator = typeof OPERATORS[number];
 export const FIELDS = ['amount', 'category', 'working_hours', 'merchant'] as const;
 export type Field = typeof FIELDS[number];
 
-export const ACTIONS = ['flag', 'reject', 'require_receipt', 'require_approval'] as const;
+export const ACTIONS = ['approved', 'rejected', 'manager_approval_needed'] as const;
 export type Action = typeof ACTIONS[number];
 
 export interface Condition {

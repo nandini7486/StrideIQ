@@ -27,16 +27,51 @@ export const RuleProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Default rules
+  const defaultRules: Rule[] = [
+    {
+      id: '1',
+      name: 'High Amount Approval',
+      condition: 'amount > 1000',
+      actions: ['manager_approval_needed'],
+      active: true,
+      priority: 1,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    },
+    {
+      id: '2',
+      name: 'Food Category Limit',
+      condition: 'category === "Food" && amount > 500',
+      actions: ['rejected'],
+      active: true,
+      priority: 2,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    },
+    {
+      id: '3',
+      name: 'After Hours',
+      condition: 'working_hours < 9 || working_hours > 17',
+      actions: ['manager_approval_needed'],
+      active: true,
+      priority: 3,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }
+  ];
+
   // Load rules from the API when the component mounts
   useEffect(() => {
     const loadRules = async () => {
       try {
         setLoading(true);
+        // Try to load from API first
         const data = await fetchRules();
-        setRules(data);
+        setRules(data.length > 0 ? data : defaultRules);
       } catch (err) {
-        setError('Failed to load rules');
-        console.error('Error loading rules:', err);
+        console.error('Error loading rules, using default rules:', err);
+        setRules(defaultRules);
       } finally {
         setLoading(false);
       }
