@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# environment files (use .env.example as a template)
+.env
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# build output
+dist/
+build/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

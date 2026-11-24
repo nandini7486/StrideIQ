@@ -2,7 +2,6 @@
 
 A powerful and flexible expense management system with a rule-based engine for automated expense processing and policy enforcement.
 
-![StrideIQ Logo](https://via.placeholder.com/150) <!-- Replace with your actual logo -->
 
 ## 🚀 Features
 
